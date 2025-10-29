@@ -11,6 +11,10 @@ async function bootstrap() {
     new ValidationPipe({
       whitelist: true,
       forbidNonWhitelisted: true,
+      transform: true,  // Para cuando el PaginationDto convierte el string en numero
+      transformOptions: { // Para cuando el PaginationDto convierte el string en numero
+        enableImplicitConversion: true,
+      }
     }),
   );
 
