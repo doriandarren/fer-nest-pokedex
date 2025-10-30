@@ -1,4 +1,6 @@
-# Project
+# NestJS with MongoDB
+
+The project contain NestJs and database MongoDB
 
 ## Settings
 
@@ -66,7 +68,69 @@ nest g pi common/pipes/parseMongoId     // Crear los Pipes
 
 
 
+// Para crear el .env
+
+npm i @nestjs/config
+
+// 1.- Luego se crea el archivo .env 
+// 2.- Se agrega en el .gitignore. 
+// 3.- Luego En app.module.ts SE AGREGA EN LA PRIMERA LINEA de los "imports":
+
+...
+ConfigModule.forRoot({
+  load: [ EnvConfiguration ]
+}),
+...
+
+// Luego crear la carpeta __.src/config/env.config.ts.__ 
+
+...
+export const EnvConfiguration = () => ({
+    environment: process.env.NODE_ENV || 'dev',
+    mongodb: process.env.MONGODB,
+    port: process.env.PORT || 3002,
+    defaultLimit: process.env.DEFAULT_LIMIT || 7,
+})
+...
+
+
+// Para instalar JOI
+
+npm i joi
+
+// crear archivo: __.src/config/joi.validation.ts.__
+
+...
+import * as Joi from 'joi';
+
+export const JoiValidationSchema = Joi.object({
+    NODE_ENV: Joi.required(),
+    MONGODB: Joi.required(),
+    PORT: Joi.number().default(3005),
+    DEFAULT_LIMIT: Joi.number().default(6),
+})
+...
+
+// Y luego en el __.src/app.module.ts.__:
+
+...
+ConfigModule.forRoot({
+  ...
+  validationSchema: JoiValidationSchema,
+}),
+...
+
+
+
 ```
+
+
+
+
+
+
+
+## Para crear Modulos
 
 ```sh
 
@@ -80,9 +144,6 @@ nest g mo cars                          // Module
 nest g co cars                          // Controller
 nest g s cars --no-spec                 // Service
 nest g res brands --no-spec
-
-
-
 
 ```
 
