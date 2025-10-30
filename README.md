@@ -170,6 +170,19 @@ Los dto siempre son clases
 // Luego:
 docker compose up -d
 
+
+
+
+// Version mejorda:
+
+## Build
+docker compose -f docker-compose.prod.yaml --env-file .env.prod up --build
+
+
+## Run
+docker compose -f docker-compose.prod.yaml --env-file .env.prod up -d
+
+
 ```
 
 
