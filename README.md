@@ -175,6 +175,16 @@ docker compose up -d
 
 // Version mejorda:
 
+
+1.- crear el archivo __.env.prod__: con el nombre "mongo-poke"
+
+```
+NODE_ENV=prod
+MONGODB=mongodb://mongo-poke:27017/nest-pokemon
+PORT=3000
+DEFAULT_LIMIT=5
+```
+
 ## Build
 docker compose -f docker-compose.prod.yaml --env-file .env.prod up --build
 
